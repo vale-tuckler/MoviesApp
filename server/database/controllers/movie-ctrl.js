@@ -1,4 +1,4 @@
-const Movie = require("../models/movie-model.js");
+const Movie = require("../models/movie-model");
 //We will perform all the CRUD Operations
 
 //Create operation
@@ -70,7 +70,7 @@ updateMovie = async(req, res) => {
 
 //Delete operation
 deleteMovie = async(req,res) => {
-    await Movie.findOneAndDelete({id: req.params._id}, (err, movie) => {
+    await Movie.findOneAndDelete({_id: req.params._id}, (err, movie) => {
         if(err){
             return res.status(400).json({
                 success:false,
@@ -80,10 +80,10 @@ deleteMovie = async(req,res) => {
         if(!movie){
             return res.status(404).json({
                 success: false,
-                message:"We didn't find the movie ou were looking for!"
+                message:"We didn't find the movie you were looking for!"
             });
         }
-        return res.status(200).json({success:true,  data: movie})
+        return res.status(200).json({success:true, data: movie})
     })
     .catch(error => { console.log(error); });
 };
